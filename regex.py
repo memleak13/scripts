@@ -1,6 +1,8 @@
 """
 	A small script to filter configurations for specific words.
 	Writes the matching lines into a seperate file
+
+	http://www.pythonregex.com
 """
 import re
 def run():
@@ -26,8 +28,8 @@ def run():
                 for line in filtered:
                         fh_filtered_config.write(line)
 	"""
-
-        #RFGW
+	"""
+    #RFGW
 	#matches QAM admin down interfaces, in "sh int des"
         filter1 = re.compile (r'Qa[0-9]{1,2}/[0-9]{1,2}\s')
         filter2 = re.compile (r'admin')
@@ -40,6 +42,7 @@ def run():
                         fh_filtered_config.write(line)
 			print line
 	"""
+	"""
 	#CMTS
 	filter1 = re.compile (r'.*Ca[0-9].*')
 	filter2 = re.compile (r'.*up.*')
@@ -51,7 +54,45 @@ def run():
                 for line in filtered:
                         fh_filtered_config.write(line)
 	"""
+	"""
+	#Zabbix, filter IfType for upstream Interfaces
+	line = "docsCableUpstream12345"
+	filter1 = re.compile (r'^docsCableUpstream($|.*)') #String can end ($) or have more chars
+	if re.search(filter1, line): 
+		print ("true")
+  	else:
+  		print ("false")
+  	"""
 
+ 	#Checks if a pattern (bgp) is NOT in a String
+ 	#http://www.regular-expressions.info/lookaround.html#lookahead
+ 	#^ - beginning of line
+ 	#$ - end of line
+ 	#(?!stringToExclude) - negative lookahead - do not match overall if stringToExclude matches
+ 	#.(?!stringToExclude) - match any character (.) provided it is not followed by the stringToExclude
+ 	#(.(?!stringToExclude))* - match zero or more of the above characters (*)
+	line = "test-bgp-test"
+	filter1 = re.compile (r'^(.(?!(bgp)))*$')
+	if re.search(filter1, line): 
+		print ("true")
+  	else:
+  		print ("false")
 
-if __name__ == "__main__": 
+if __name__ == "__main__":
     run()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

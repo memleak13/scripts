@@ -4,16 +4,16 @@
 """
 
 def run():
-	line1 = "interface GigabitEthernet2/"
+	line1 = "interface GigabitEthernet3/"
 	line2 = "switchport trunk native vlan 62"
  	line3 = "switchport mode trunk"
  	line4 = "ip access-group Net in"
  	line5 = "mac access-group l2 in"
  	line6 = "ip dhcp snooping limit rate 100"
  	line7 = ("ip dhcp snooping vlan 64 information option format-type " 
- 			 "circuit-id override string GigabitEthernet2/")
+ 			 "circuit-id override string GigabitEthernet3/")
  	line8 = ("ip dhcp snooping vlan 63 information option format-type "
- 			 "circuit-id override string GigabitEthernet2/")
+ 			 "circuit-id override string GigabitEthernet3/")
  	print "conf t\n"
 	for interface in range(1,81):
 		print line1 + str(interface)
